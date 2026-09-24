@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Portal Oficial do Reality</title>
+<meta name="description" content="Portal oficial do reality: edições, participantes, acontecimentos e votação.">
+<style>
+:root{
+  --bg:#090b12;--panel:#111522;--panel2:#171b2b;--text:#f7f7fb;--muted:#aeb3c6;
+  --accent:#c84cff;--accent2:#ff3ca7;--line:#272d43;--good:#54e38e;--danger:#ff647c;
+  --shadow:0 18px 55px rgba(0,0,0,.28);--radius:22px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 20% -10%,rgba(200,76,255,.18),transparent 35%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.top{position:sticky;top:0;z-index:50;background:rgba(9,11,18,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{max-width:1180px;margin:auto;padding:13px 18px;display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:21px;box-shadow:0 8px 25px rgba(200,76,255,.28)}
+.brand strong{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.navbtn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:14px;padding:10px 13px}
+.container{max-width:1180px;margin:auto;padding:24px 18px 70px}
+.hero{border:1px solid var(--line);border-radius:30px;overflow:hidden;position:relative;min-height:390px;display:flex;align-items:end;background:linear-gradient(135deg,#191329,#111522)}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,6,10,.92),rgba(5,6,10,.38),rgba(5,6,10,.25))}
+.heroimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7}
+.heroContent{position:relative;padding:34px;max-width:780px}
+.kicker{text-transform:uppercase;letter-spacing:.12em;color:#ddd;font-size:12px;font-weight:800}
+h1{font-size:clamp(36px,7vw,72px);line-height:.95;margin:10px 0 16px}
+h2{font-size:30px;margin:0 0 16px}.lead{font-size:18px;color:#ddd;line-height:1.55}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.primary,.secondary,.danger{border:0;border-radius:15px;padding:13px 18px;font-weight:800}
+.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.secondary{background:var(--panel2);color:#fff;border:1px solid var(--line)}
+.danger{background:#32151d;color:#ffb4bf;border:1px solid #66303c}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:24px}
+.card{grid-column:span 12;background:linear-gradient(180deg,var(--panel),#0f1320);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.two{grid-column:span 6}.three{grid-column:span 4}
+@media(max-width:800px){.two,.three{grid-column:span 12}.hero{min-height:440px}.heroContent{padding:24px}.container{padding-left:12px;padding-right:12px}}
+.sectionHead{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:30px 0 14px}
+.sectionHead h2{margin:0}.muted{color:var(--muted)}
+.voteCard{display:grid;grid-template-columns:170px 1fr;gap:18px;align-items:stretch}
+.voteImg{width:100%;height:170px;object-fit:cover;border-radius:18px;background:#20253a}
+@media(max-width:600px){.voteCard{grid-template-columns:1fr}.voteImg{height:190px}}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#231d37;border:1px solid #42335c;color:#e5caff;font-size:12px;font-weight:800}
+.participants{display:flex;gap:14px;overflow:auto;padding-bottom:8px;scrollbar-width:thin}
+.person{min-width:150px;background:#0d111c;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.person img{width:100%;height:165px;object-fit:cover;display:block}
+.person .pbody{padding:12px}.person small{color:var(--muted)}
+.eliminated img{filter:grayscale(1);opacity:.62}.eliminated{opacity:.78}
+.rolegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.role{padding:16px;border:1px solid var(--line);border-radius:18px;background:#0e121e}.role b{display:block;font-size:13px;color:#c9cde0;margin-bottom:6px}.role strong{font-size:17px}
+.timeline{display:grid;gap:12px}.event{display:grid;grid-template-columns:92px 1fr;gap:15px;padding:14px;border:1px solid var(--line);border-radius:18px;background:#0e121e}
+.event img{width:92px;height:92px;object-fit:cover;border-radius:15px}.event h3{margin:0 0 5px}.event p{margin:0;color:var(--muted);line-height:1.5}
+@media(max-width:520px){.event{grid-template-columns:1fr}.event img{width:100%;height:180px}}
+.editions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.edition{padding:18px;border:1px solid var(--line);border-radius:20px;background:#0e121e;position:relative;overflow:hidden}.edition:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--edition-accent,var(--accent))}
+footer{margin-top:45px;color:#7f8497;text-align:center;font-size:13px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);z-index:100;display:none}
+.overlay.show{display:block}.drawer{position:absolute;right:0;top:0;height:100%;width:min(390px,92vw);background:#0c101b;border-left:1px solid var(--line);padding:22px;overflow:auto}
+.modal{position:absolute;inset:0;display:grid;place-items:center;padding:18px}.modalBox{width:min(760px,100%);max-height:92vh;overflow:auto;background:#0c101b;border:1px solid var(--line);border-radius:24px;padding:22px}
+.close{float:right;border:1px solid var(--line);background:var(--panel);color:#fff;border-radius:12px;padding:8px 11px}
+label{display:block;font-size:13px;font-weight:800;margin:12px 0 6px;color:#dfe2ee}
+input,textarea,select{width:100%;border:1px solid var(--line);background:#111624;color:#fff;border-radius:13px;padding:11px 12px;outline:none}
+textarea{min-height:100px;resize:vertical}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){.formgrid{grid-template-columns:1fr}}
+.row{display:flex;gap:8px;flex-wrap:wrap}.mini{padding:8px 10px;border-radius:11px;border:1px solid var(--line);background:#171c2a;color:#fff}
+.notice{padding:13px 15px;border-radius:15px;background:#17142a;border:1px solid #3b2c55;color:#c9c4d8;margin-top:12px}
+.search{max-width:360px}
+.hidden{display:none!important}
+.empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:18px}
+</style>
+</head>
+<body>
+<header class="top">
+  <nav class="nav">
+    <div class="brand"><div class="logo">🎬</div><strong id="navTitle">Portal Oficial</strong></div>
+    <button class="navbtn" onclick="openDrawer()">☰ Menu</button>
+  </nav>
+</header>
+
+<main class="container">
+  <div id="app"></div>
+  <footer>Portal oficial • conteúdo administrado pelo criador • <span id="year"></span></footer>
+</main>
+
+<div id="drawer" class="overlay" onclick="if(event.target===this)closeDrawer()">
+  <aside class="drawer">
+    <button class="close" onclick="closeDrawer()">✕</button>
+    <h2>☰ Edições</h2>
+    <p class="muted">Escolha uma edição para abrir o portal correspondente.</p>
+    <div id="drawerList" class="editions"></div>
+    <hr style="border-color:var(--line);margin:24px 0">
+    <button class="secondary" style="width:100%" onclick="openAdmin()">⚙️ Área do criador</button>
+  </aside>
+</div>
+
+<div id="modal" class="overlay" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modalBox" id="modalBox"></div></div></div>
+
+<script>
+const STORAGE='portal_oficial_reality_v1';
+const DEFAULT={
+  settings:{siteName:'Portal Oficial do Reality',siteSubtitle:'Acompanhe cada edição, cada prova e cada acontecimento.',adminPin:'1234'},
+  editions:[{
+    id:'ed1',name:'Reality — 1ª Edição',year:'2026',accent:'#c84cff',
+    cover:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80',
+    description:'Acompanhe tudo da primeira edição: participantes, paredões e os principais acontecimentos.',
+    voting:{title:'Paredão da Semana',text:'Vote em quem você quer que permaneça no reality.',image:'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=80',url:''},
+    roles:[{role:'Líder',name:'A definir'},{role:'Anjo',name:'A definir'},{role:'Imunizado',name:'A definir'}],
+    participants:[
+      {name:'Participante 01',status:'No jogo',desc:'Apresentação do participante.',photo:'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=600&q=80'},
+      {name:'Participante 02',status:'No jogo',desc:'Apresentação do participante.',photo:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80'},
+      {name:'Participante 03',status:'Eliminado',desc:'Eliminado da edição.',photo:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80'}
+    ],
+    events:[
+      {id:'ev1',type:'Anúncio',title:'Começou a temporada!',date:'Semana 1',text:'A primeira edição está no ar. Confira os participantes e acompanhe os acontecimentos.',image:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=900&q=80',voteUrl:''},
+      {id:'ev2',type:'Prova',title:'Primeira prova da edição',date:'Semana 1',text:'Uma disputa marcou o início da temporada.',image:'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=80',voteUrl:''}
+    ]
+  }]
+};
+let data=load();
+let currentId=data.editions[0]?.id;
+
+function load(){try{return JSON.parse(localStorage.getItem(STORAGE))||structuredClone(DEFAULT)}catch(e){return structuredClone(DEFAULT)}}
+function save(){localStorage.setItem(STORAGE,JSON.stringify(data))}
+function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function edition(){return data.editions.find(x=>x.id===currentId)||data.editions[0]}
+function cssAccent(){document.documentElement.style.setProperty('--accent',edition()?.accent||'#c84cff')}
+function openDrawer(){renderDrawer();drawer.classList.add('show')}
+function closeDrawer(){drawer.classList.remove('show')}
+function closeModal(){modal.classList.remove('show')}
+function go(id){currentId=id;cssAccent();closeDrawer();render()}
+function vote(url){if(!url){alert('O criador ainda não adicionou o link da votação.');return} location.href=url}
+function detail(ev){
+  const e=edition();
+  modalBox.innerHTML=`<button class="close" onclick="closeModal()">✕</button>
+  <span class="badge">${esc(ev.type)}</span><h2 style="margin-top:12px">${esc(ev.title)}</h2>
+  <div class="muted">${esc(ev.date||'')}</div>
+  ${ev.image?`<img src="${esc(ev.image)}" style="width:100%;max-height:390px;object-fit:cover;border-radius:18px;margin:16px 0">`:''}
+  <p style="font-size:17px;line-height:1.7;color:#d8dbea">${esc(ev.text)}</p>
+  ${ev.voteUrl?`<button class="primary" onclick="vote('${esc(ev.voteUrl)}')">🗳️ Ir para a votação</button>`:''}`;
+  modal.classList.add('show')
+}
+function renderDrawer(){
+  drawerList.innerHTML=data.editions.map(e=>`<button class="edition" style="--edition-accent:${esc(e.accent)};text-align:left;color:#fff;width:100%;margin-bottom:10px" onclick="go('${esc(e.id)}')"><b>${esc(e.name)}</b><div class="muted">${esc(e.year||'')}</div></button>`).join('')||'<div class="empty">Nenhuma edição cadastrada.</div>'
+}
+function render(){
+  const e=edition();
+  if(!e){app.innerHTML='<div class="empty">Crie sua primeira edição na Área do criador.</div>';return}
+  navTitle.textContent=e.name; document.title=e.name+' • Portal Oficial'; cssAccent();
+  app.innerHTML=`
+  <section class="hero">
+    <img class="heroimg" src="${esc(e.cover)}" onerror="this.style.display='none'">
+    <div class="heroContent">
+      <div class="kicker">PORTAL OFICIAL • ${esc(e.year||'EDIÇÃO')}</div>
+      <h1>${esc(e.name)}</h1>
+      <p class="lead">${esc(e.description)}</p>
+      <div class="actions"><button class="primary" onclick="document.getElementById('votacao').scrollIntoView()">🚨 Ver votação</button><button class="secondary" onclick="openDrawer()">☰ Outras edições</button></div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <section class="card" id="votacao">
+      <div class="sectionHead"><h2>🚨 ${esc(e.voting?.title||'Paredão')}</h2><span class="badge">VOTAÇÃO</span></div>
+      <div class="voteCard">
+        <img class="voteImg" src="${esc(e.voting?.image||e.cover)}" onerror="this.src='${esc(e.cover)}'">
+        <div><p class="lead">${esc(e.voting?.text||'A votação da semana será divulgada aqui.')}</p>
+        <div class="actions"><button class="primary" onclick="vote('${esc(e.voting?.url||'')}')">🗳️ VOTAR</button></div>
+        ${!e.voting?.url?'<div class="notice">O link da votação ainda não foi configurado pelo criador.</div>':''}</div>
+      </div>
+    </section>
+
+    <section class="card"><div class="sectionHead"><h2>👑 Destaques da semana</h2></div>
+      <div class="rolegrid">${(e.roles||[]).map(r=>`<div class="role"><b>${esc(r.role)}</b><strong>${esc(r.name)}</strong></div>`).join('')||'<div class="empty">Nenhum destaque cadastrado.</div>'}</div>
+    </section>
+
+    <section class="card"><div class="sectionHead"><h2>👥 Participantes</h2><span class="muted">deslize para o lado</span></div>
+      <div class="participants">${(e.participants||[]).map(p=>`<article class="person ${p.status==='Eliminado'?'eliminated':''}">
+        <img src="${esc(p.photo)}" onerror="this.src='${esc(e.cover)}'"><div class="pbody"><b>${esc(p.name)}</b><div><span class="badge">${esc(p.status||'No jogo')}</span></div><small>${esc(p.desc||'')}</small></div></article>`).join('')||'<div class="empty" style="width:100%">Nenhum participante cadastrado.</div>'}</div>
+    </section>
+
+    <section class="card"><div class="sectionHead"><h2>📰 Acontecimentos</h2><input class="search" id="eventSearch" placeholder="Buscar acontecimento..." oninput="filterEvents()"></div>
+      <div id="timeline" class="timeline">${eventsHTML(e.events||[])}</div>
+    </section>
+  </div>`;
+}
+function eventsHTML(events){
+ return events.map(ev=>`<article class="event" data-search="${esc((ev.type+' '+ev.title+' '+ev.text).toLowerCase())}">
+  ${ev.image?`<img src="${esc(ev.image)}" onerror="this.style.display='none'">`:'<div class="event" style="display:grid;place-items:center">📰</div>'}
+  <div><span class="badge">${esc(ev.type)}</span><div class="muted" style="margin-top:6px">${esc(ev.date||'')}</div><h3>${esc(ev.title)}</h3><p>${esc((ev.text||'').slice(0,170))}${(ev.text||'').length>170?'…':''}</p><div class="actions"><button class="secondary" onclick='detail(${JSON.stringify(ev).replace(/</g,"\\u003c")})'>Ler detalhes ↓</button></div></div>
+ </article>`).join('')||'<div class="empty">Nenhum acontecimento cadastrado.</div>'
+}
+function filterEvents(){const q=(eventSearch.value||'').toLowerCase();document.querySelectorAll('#timeline .event').forEach(x=>x.style.display=x.dataset.search.includes(q)?'grid':'none')}
+
+function openAdmin(){
+ closeDrawer();
+ modalBox.innerHTML=`<button class="close" onclick="closeModal()">✕</button><h2>⚙️ Área do criador</h2><p class="muted">Nesta versão, os dados do portal ficam salvos no navegador. Para publicação com acesso realmente exclusivo ao criador, depois podemos ligar esta área a autenticação/Firebase.</p>
+ <label>PIN do criador</label><input id="pin" type="password" inputmode="numeric" placeholder="Digite o PIN"><div class="actions"><button class="primary" onclick="checkPin()">Entrar</button></div>`;
+ modal.classList.add('show')
+}
+function checkPin(){if(pin.value===data.settings.adminPin){adminPanel()}else alert('PIN incorreto.')}
+function adminPanel(){
+ modalBox.innerHTML=`<button class="close" onclick="closeModal()">✕</button><h2>⚙️ Painel do criador</h2>
+ <div class="row" style="margin-bottom:15px"><button class="primary" onclick="newEdition()">＋ Nova edição</button><button class="secondary" onclick="editEdition()">✏️ Editar edição atual</button><button class="secondary" onclick="manageEvents()">📰 Acontecimentos</button></div>
+ <div class="editions">${data.editions.map(e=>`<div class="edition" style="--edition-accent:${esc(e.accent)}"><b>${esc(e.name)}</b><div class="muted">${esc(e.year||'')}</div><div class="actions"><button class="mini" onclick="go('${esc(e.id)}');adminPanel()">Abrir</button><button class="mini" onclick="editEdition('${esc(e.id)}')">Editar</button><button class="mini" onclick="deleteEdition('${esc(e.id)}')">Excluir</button></div></div>`).join('')}</div>`;
+ modal.classList.add('show')
+}
+function newEdition(){editForm(null)}
+function editEdition(id=currentId){editForm(data.editions.find(e=>e.id===id)||null)}
+function editForm(e){
+ const isNew=!e; const x=e||{id:'ed'+Date.now(),name:'Nova Edição',year:'2026',accent:'#c84cff',cover:'',description:'',voting:{title:'Paredão da Semana',text:'Vote em quem você quer que permaneça no reality.',image:'',url:''},roles:[],participants:[],events:[]};
+ modalBox.innerHTML=`<button class="close" onclick="adminPanel()">✕</button><h2>${isNew?'＋ Nova edição':'✏️ Editar edição'}</h2>
+ <div class="formgrid"><div><label>Nome</label><input id="fName" value="${esc(x.name)}"></div><div><label>Ano</label><input id="fYear" value="${esc(x.year||'')}"></div></div>
+ <div class="formgrid"><div><label>Cor principal</label><input id="fAccent" value="${esc(x.accent||'#c84cff')}"></div><div><label>Capa (URL de imagem)</label><input id="fCover" value="${esc(x.cover||'')}"></div></div>
+ <label>Descrição</label><textarea id="fDesc">${esc(x.description||'')}</textarea>
+ <h3>🚨 Votação</h3>
+ <div class="formgrid"><div><label>Título</label><input id="vTitle" value="${esc(x.voting?.title||'Paredão da Semana')}"></div><div><label>Imagem (URL)</label><input id="vImage" value="${esc(x.voting?.image||'')}"></div></div>
+ <label>Texto da votação</label><textarea id="vText">${esc(x.voting?.text||'')}</textarea><label>Link da votação existente</label><input id="vUrl" placeholder="https://..." value="${esc(x.voting?.url||'')}">
+ <div class="actions"><button class="primary" onclick='saveEdition(${JSON.stringify(x).replace(/</g,"\\u003c")},${isNew})'>Salvar edição</button></div>
+ <div class="notice">Dica: você pode usar links de imagens públicas. O botão VOTAR apenas abre o endereço da votação que você já criou.</div>`;
+}
+function saveEdition(old,isNew){
+ const e={...old,name:fName.value.trim()||'Edição sem nome',year:fYear.value.trim(),accent:fAccent.value.trim()||'#c84cff',cover:fCover.value.trim(),description:fDesc.value.trim(),voting:{title:vTitle.value.trim()||'Paredão da Semana',text:vText.value.trim(),image:vImage.value.trim(),url:vUrl.value.trim()},roles:old.roles||[],participants:old.participants||[],events:old.events||[]};
+ if(isNew){data.editions.push(e);currentId=e.id}else Object.assign(data.editions.find(q=>q.id===old.id),e);
+ save();adminPanel();render();
+}
+function deleteEdition(id){if(data.editions.length<=1)return alert('Mantenha pelo menos uma edição.');if(confirm('Excluir esta edição?')){data.editions=data.editions.filter(e=>e.id!==id);currentId=data.editions[0].id;save();adminPanel();render()}}
+function manageEvents(){
+ const e=edition();
+ modalBox.innerHTML=`<button class="close" onclick="adminPanel()">✕</button><h2>📰 Acontecimentos — ${esc(e.name)}</h2>
+ <button class="primary" onclick="eventForm()">＋ Novo acontecimento</button><div class="timeline" style="margin-top:15px">${(e.events||[]).map(ev=>`<div class="event"><div>${ev.image?'🖼️':'📰'}</div><div><span class="badge">${esc(ev.type)}</span><h3>${esc(ev.title)}</h3><p>${esc(ev.text)}</p><div class="actions"><button class="mini" onclick="eventForm('${esc(ev.id)}')">Editar</button><button class="mini" onclick="deleteEvent('${esc(ev.id)}')">Excluir</button></div></div></div>`).join('')||'<div class="empty">Nenhum acontecimento.</div>'}</div>`;
+}
+function eventForm(id){
+ const e=edition(), old=(e.events||[]).find(x=>x.id===id)||{id:'ev'+Date.now(),type:'Anúncio',title:'',date:'',text:'',image:'',voteUrl:''};
+ modalBox.innerHTML=`<button class="close" onclick="manageEvents()">✕</button><h2>📰 ${id?'Editar':'Novo'} acontecimento</h2>
+ <div class="formgrid"><div><label>Tipo</label><select id="eType">${['Paredão','Prova','Briga','Festa','Eliminação','Anúncio','Outro'].map(v=>`<option ${v===old.type?'selected':''}>${v}</option>`).join('')}</select></div><div><label>Data/semana</label><input id="eDate" value="${esc(old.date||'')}"></div></div>
+ <label>Título</label><input id="eTitle" value="${esc(old.title||'')}"><label>Imagem (URL)</label><input id="eImage" value="${esc(old.image||'')}"><label>Texto completo</label><textarea id="eText">${esc(old.text||'')}</textarea><label>Link de votação (opcional)</label><input id="eVote" value="${esc(old.voteUrl||'')}">
+ <div class="actions"><button class="primary" onclick='saveEvent(${JSON.stringify(old).replace(/</g,"\\u003c")})'>Salvar acontecimento</button></div>`;
+}
+function saveEvent(old){
+ const e=edition(); const item={...old,type:eType.value,title:eTitle.value.trim(),date:eDate.value.trim(),image:eImage.value.trim(),text:eText.value.trim(),voteUrl:eVote.value.trim()};
+ e.events=e.events||[]; const i=e.events.findIndex(x=>x.id===old.id); if(i>=0)e.events[i]=item;else e.events.push(item);save();manageEvents();render();
+}
+function deleteEvent(id){const e=edition();if(confirm('Excluir acontecimento?')){e.events=e.events.filter(x=>x.id!==id);save();manageEvents();render()}}
+year.textContent=new Date().getFullYear();
+render();
+</script>
+</body>
+</html>
