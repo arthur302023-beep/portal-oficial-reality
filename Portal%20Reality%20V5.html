@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portal Oficial • Reality</title>
+<style>
+:root{--accent:#8b5cf6;--bg:#09090b;--panel:#121217;--panel2:#18181f;--text:#f7f7fb;--muted:#a1a1aa;--line:#27272f;--danger:#ef4444;--ok:#22c55e}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#23134a 0,transparent 35%),var(--bg);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{max-width:1120px;margin:auto;padding:0 16px}
+header{position:sticky;top:0;z-index:20;background:#09090bee;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:900;letter-spacing:.3px}.brand small{display:block;color:var(--muted);font-size:10px;font-weight:600;letter-spacing:1.5px}.hamb{border:1px solid var(--line);background:var(--panel);color:white;border-radius:12px;padding:10px 12px}
+.hero{margin:22px 0;border:1px solid var(--line);border-radius:24px;overflow:hidden;position:relative;min-height:330px;background:var(--panel)}
+.hero img{width:100%;height:330px;object-fit:cover;display:block;opacity:.65}.hero .shade{position:absolute;inset:0;background:linear-gradient(0deg,#09090b 2%,transparent 65%)}.heroText{position:absolute;left:22px;right:22px;bottom:22px}.eyebrow{color:var(--accent);font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:1.2px}.hero h1{font-size:clamp(30px,7vw,60px);margin:5px 0}.hero p{max-width:700px;color:#ddd;margin:0}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.btn{border:0;border-radius:12px;padding:11px 15px;font-weight:800;background:var(--accent);color:white}.btn.ghost{background:#ffffff0b;border:1px solid var(--line)}.btn.danger{background:#7f1d1d}.btn:disabled{opacity:.5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px}.stat b{font-size:22px;display:block}.stat span{font-size:12px;color:var(--muted)}
+.section{margin:28px 0}.sectionHead{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}.section h2{margin:0;font-size:21px}.sectionHead p{margin:3px 0 0;color:var(--muted);font-size:13px}
+.castShell{position:relative}.castTrack{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(145px,calc(25% - 9px));gap:12px;overflow:hidden;scroll-behavior:smooth;padding:2px}.castCard{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}.castPhoto{height:185px;background:#202027}.castPhoto img{width:100%;height:100%;object-fit:cover}.castBody{padding:10px}.castName{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tag{display:inline-flex;margin-top:5px;padding:4px 7px;border-radius:999px;background:#ffffff0b;color:#ddd;font-size:10px}.eliminated{filter:grayscale(1);opacity:.65}.arrow{position:absolute;top:80px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#111116eF;color:#fff;font-size:20px;z-index:3}.arrow.left{left:-5px}.arrow.right{right:-5px}.dots{display:flex;justify-content:center;gap:5px;margin-top:10px}.dot{width:6px;height:6px;border-radius:50%;background:#444}.dot.active{width:18px;background:var(--accent);border-radius:9px}
+.filters{display:flex;gap:8px;overflow:auto;padding-bottom:4px}.filter{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:#ccc;border-radius:999px;padding:8px 12px}.filter.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.posts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.post{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}.post img{width:100%;height:180px;object-fit:cover}.postBody{padding:13px}.postMeta{font-size:11px;color:var(--accent);font-weight:800;text-transform:uppercase}.post h3{margin:5px 0;font-size:17px}.post p{margin:0;color:#aaa;font-size:13px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:16px}.menu{display:none;position:absolute;right:16px;top:58px;background:#15151b;border:1px solid var(--line);border-radius:15px;padding:8px;box-shadow:0 20px 60px #000}.menu.open{display:block}.menu button{display:block;width:100%;text-align:left;background:none;border:0;color:#fff;padding:11px;border-radius:9px}.menu button:hover{background:#ffffff0b}
+.modal{position:fixed;inset:0;background:#000b;z-index:50;display:none;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.box{width:min(760px,100%);max-height:92vh;overflow:auto;background:#111116;border:1px solid var(--line);border-radius:22px;padding:18px}.box h2{margin-top:0}.close{float:right;border:0;background:#ffffff0b;color:#fff;border-radius:10px;padding:8px}
+.form{display:grid;gap:10px}.form label{font-size:12px;color:#aaa}.form input,.form textarea,.form select{width:100%;background:#09090d;color:#fff;border:1px solid var(--line);border-radius:11px;padding:11px}.form textarea{min-height:90px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.adminTabs{display:flex;gap:7px;overflow:auto;margin-bottom:14px}.adminTabs button{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:#ccc;border-radius:10px;padding:8px 11px}.adminTabs button.active{background:var(--accent);color:#fff}.list{display:grid;gap:9px}.item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:10px}.itemActions{display:flex;gap:6px}.mini{padding:7px 9px;border-radius:9px;border:1px solid var(--line);background:#ffffff08;color:#fff}.notice{padding:10px 12px;border-radius:12px;background:#172554;border:1px solid #1e3a8a;color:#bfdbfe;font-size:13px}.warn{background:#451a03;border-color:#78350f;color:#fed7aa}
+footer{padding:35px 0 60px;color:#777;text-align:center;font-size:12px}
+@media(max-width:700px){.posts{grid-template-columns:1fr}.castTrack{grid-auto-columns:calc(50% - 6px)}.hero,.hero img{min-height:300px;height:300px}.row{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}.stat{padding:11px}.stat b{font-size:18px}}
+
+.uploadBox{border:1px solid var(--line);border-radius:16px;padding:12px;background:#0d0d12;display:grid;gap:9px}.uploadHead{display:flex;justify-content:space-between;gap:10px}.uploadHead span{color:#777;font-size:11px}.fileBtn{display:inline-flex;align-items:center;justify-content:center;border:1px dashed #555;border-radius:12px;padding:12px;background:#ffffff06;color:#fff;font-weight:800}.uploadPreview{width:100%;max-height:240px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}.emptyPreview{display:grid;place-items:center;min-height:120px;color:#777}.uploadHint{font-size:11px;color:#777}.adminIntro{display:grid;gap:4px;margin-bottom:12px}.adminIntro span{color:#999;font-size:12px}.slotGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:14px}.slotBtn{min-height:70px;border:1px solid var(--line);background:var(--panel);color:#fff;border-radius:12px;padding:8px;text-align:left}.slotBtn strong,.slotBtn small{display:block}.slotBtn small{color:#888;margin-top:4px}.slotBtn.filled{border-color:var(--accent)}.itemPerson{display:flex;align-items:center;gap:9px}.itemPerson img,.itemPerson>span{width:42px;height:42px;border-radius:10px;object-fit:cover;display:grid;place-items:center;background:#222}.panelTitle{font-size:17px;font-weight:900;margin-bottom:2px}.statusGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.statusGrid>div{background:#ffffff08;border:1px solid var(--line);padding:10px;border-radius:12px}.statusGrid small,.statusGrid b{display:block}.statusGrid small{color:#888}.bigAvatar{height:240px;border-radius:16px;background:#202027;display:grid;place-items:center;font-size:70px}.avatarFallback{height:100%;display:grid;place-items:center;font-size:48px}.cropOverlay{position:fixed;inset:0;background:#000d;z-index:200;display:grid;place-items:center;padding:14px}.cropBox{width:min(520px,100%);max-height:92vh;overflow:auto;background:#111116;border:1px solid #333;border-radius:20px;padding:16px;box-shadow:0 20px 70px #000}.cropBox canvas{display:block;width:100%;max-height:360px;object-fit:contain;background:#050505;border-radius:14px;margin:10px 0 14px}.cropBox label{display:grid;gap:5px;color:#aaa;font-size:12px;margin:9px 0}.cropHelp{color:#999;font-size:12px}.cropBox input[type=range]{width:100%}
+@media(max-width:700px){.slotGrid{grid-template-columns:repeat(2,1fr)}}
+
+.post-paredao{border-color:#f97316}.post-paredao .postMeta{color:#fb923c}.post-noticia{border-color:#38bdf8}.post-noticia .postMeta{color:#38bdf8}.post-resultado{border-color:#22c55e}.post-resultado .postMeta{color:#4ade80}.post-enquete{border-color:#a78bfa}.post-enquete .postMeta{color:#c4b5fd}.post-acontecimento{border-color:#facc15}.post-acontecimento .postMeta{color:#fde047}.post-anuncio{border-color:#ec4899}.post-anuncio .postMeta{color:#f472b6}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><div class="brand">PORTAL <span style="color:var(--accent)">REALITY</span><small>OFICIAL</small></div><button class="hamb" id="menuBtn">☰</button><div class="menu" id="menu"><button id="creatorBtn">🔐 Área do criador</button><button id="shareBtn">🔗 Compartilhar portal</button></div></div></header>
+<main class="wrap">
+<section class="hero" id="hero"></section>
+<div class="stats" id="stats"></div>
+<section class="section"><div class="sectionHead"><div><h2>🎭 Elenco</h2><p>14 vagas • fotos pela galeria • status e destaques editáveis pelo criador</p><p>Deslize ou use as setas para conhecer os participantes.</p></div></div><div class="castShell"><button class="arrow left" id="castPrev">‹</button><div class="castTrack" id="castTrack"></div><button class="arrow right" id="castNext">›</button></div><div class="dots" id="dots"></div></section>
+<section class="section"><div class="sectionHead"><div><h2>📺 Conteúdos</h2><p>Notícias, paredões, resultados e acontecimentos da edição.</p></div></div><div class="filters" id="filters"></div><div class="posts" id="posts"></div></section>
+<footer>Portal Oficial Reality • conteúdo da edição</footer>
+</main>
+
+<div class="modal" id="modal"><div class="box" id="modalBox"></div></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+import {getFirestore,collection,doc,getDocs,getDoc,setDoc,addDoc,updateDoc,deleteDoc,query,orderBy} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+import {getStorage,ref as storageRef,uploadBytes,getDownloadURL} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-storage.js";
+
+const firebaseConfig={apiKey:"AIzaSyBYLyvwUBKdD2yubykYzQ1w1oVTFveAJMU",authDomain:"reality-gacha-votacao-acb28.firebaseapp.com",projectId:"reality-gacha-votacao-acb28",storageBucket:"reality-gacha-votacao-acb28.firebasestorage.app",messagingSenderId:"304393731037",appId:"1:304393731037:web:f36aa225701281402d5434"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),storage=getStorage(app);
+const TYPES=[["all","Todos"],["paredao","Paredão"],["noticia","Notícia"],["resultado","Resultado"],["enquete","Enquete"],["acontecimento","Acontecimento"],["anuncio","Anúncio"]];
+const DEFAULT={id:"main",name:"Reality",year:"1ª Edição",description:"Bem-vindo ao Portal Oficial.",cover:"",voteUrl:"",accent:"#8b5cf6"};
+let data={edition:DEFAULT,cast:[],posts:[]},filter="all",creatorEmail="";
+const $=s=>document.querySelector(s), esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+function applyTheme(){document.documentElement.style.setProperty("--accent",data.edition.accent||"#8b5cf6")}
+function imgOrBlank(src,alt=""){return src?`<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy">`:""}
+async function loadData(){
+ try{
+  const e=await getDoc(doc(db,"portal","edition")); if(e.exists()) data.edition={...DEFAULT,...e.data()};
+  const cs=await getDocs(collection(db,"portal","cast")); data.cast=cs.docs.map(x=>({id:x.id,...x.data()})).sort((a,b)=>(a.order||0)-(b.order||0));
+  const ps=await getDocs(collection(db,"portal","posts")); data.posts=ps.docs.map(x=>({id:x.id,...x.data()})).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+ }catch(e){console.error(e);toast("Não foi possível carregar os dados agora.");}
+ applyTheme();render();
+}
+function render(){
+ const e=data.edition;
+ $("#hero").innerHTML=`${imgOrBlank(e.cover,e.name)}<div class="shade"></div><div class="heroText"><div class="eyebrow">${esc(e.year)}</div><h1>${esc(e.name)}</h1><p>${esc(e.description||"")}</p><div class="actions">${e.voteUrl?`<button class="btn" onclick="location.href='${esc(e.voteUrl)}'">🗳️ Votar</button>`:""}<button class="btn ghost" id="shareHero">🔗 Compartilhar</button></div></div>`;
+ $("#stats").innerHTML=`<div class="stat"><b>${data.cast.filter(p=>p.name).length}</b><span>participantes</span></div><div class="stat"><b>${data.posts.length}</b><span>conteúdos</span></div><div class="stat"><b>${data.posts.filter(p=>p.type==="paredao").length}</b><span>paredões</span></div>`;
+ renderCast();renderFilters();renderPosts();$("#shareHero").onclick=share;
+}
+function renderCast(){
+ const t=$("#castTrack");
+ const people=data.cast.filter(p=>p.name);
+ t.innerHTML=people.length?people.map(p=>`<article class="castCard ${p.status==="Eliminado"||p.status==="Expulso"?"eliminated":""}" data-cast="${p.id}">
+   <div class="castPhoto">${imgOrBlank(p.photo,p.name)||`<div class="avatarFallback">👤</div>`}</div>
+   <div class="castBody"><div class="castName">${esc(p.name)}</div><span class="tag">${esc(p.role||p.status||"No jogo")}</span></div>
+ </article>`).join(""):`<div class="empty">O elenco ainda não foi cadastrado.</div>`;
+ const pages=Math.max(1,Math.ceil(people.length/4));
+ $("#dots").innerHTML=Array.from({length:pages},(_,i)=>`<i class="dot ${i===0?"active":""}"></i>`).join("");
+ t.onscroll=()=>{const page=Math.min(pages-1,Math.round(t.scrollLeft/(t.clientWidth||1)));[...$("#dots").children].forEach((d,i)=>d.classList.toggle("active",i===page))};
+ document.querySelectorAll("[data-cast]").forEach(x=>x.onclick=()=>openCast(x.dataset.cast));
+}
+function openCast(id){
+ const p=data.cast.find(x=>x.id===id); if(!p)return;
+ $("#modalBox").innerHTML=`<button class="close" onclick="closeModal()">✕</button>
+ ${p.photo?imgOrBlank(p.photo,p.name):`<div class="bigAvatar">👤</div>`}
+ <div class="postBody"><div class="postMeta">Participante</div><h2>${esc(p.name)}</h2>
+ <div class="statusGrid"><div><small>Status</small><b>${esc(p.status||"No jogo")}</b></div><div><small>Destaque</small><b>${esc(p.role||"Nenhum")}</b></div></div>
+ ${p.bio?`<p style="white-space:pre-wrap;color:#bbb">${esc(p.bio)}</p>`:""}</div>`;
+ $("#modal").classList.add("show");
+}
+function renderFilters(){$("#filters").innerHTML=TYPES.map(([v,n])=>`<button class="filter ${filter===v?"active":""}" data-f="${v}">${n}</button>`).join("");document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{filter=b.dataset.f;renderFilters();renderPosts()})}
+function renderPosts(){
+ const ps=filter==="all"?data.posts:data.posts.filter(p=>p.type===filter);
+ $("#posts").innerHTML=ps.length?ps.map(p=>`<article class="post post-${p.type}" data-post="${p.id}">${p.image?imgOrBlank(p.image,p.title):""}<div class="postBody"><div class="postMeta">${esc(TYPES.find(x=>x[0]===p.type)?.[1]||p.type)}</div><h3>${esc(p.title)}</h3><p>${esc(p.text||"")}</p></div></article>`).join(""):`<div class="empty">Nenhum conteúdo nessa categoria ainda.</div>`;
+ document.querySelectorAll("[data-post]").forEach(x=>x.onclick=()=>openPost(x.dataset.post));
+}
+function openPost(id){const p=data.posts.find(x=>x.id===id);if(!p)return;$("#modalBox").innerHTML=`<button class="close" onclick="closeModal()">✕</button>${p.image?imgOrBlank(p.image,p.title):""}<div class="postBody"><div class="postMeta">${esc(TYPES.find(x=>x[0]===p.type)?.[1]||p.type)}</div><h2>${esc(p.title)}</h2><p style="white-space:pre-wrap;color:#bbb">${esc(p.text||"")}</p>${p.voteUrl?`<button class="btn" onclick="location.href='${esc(p.voteUrl)}'">🗳️ Abrir votação</button>`:""}</div>`;$("#modal").classList.add("show")}
+window.closeModal=()=>$("#modal").classList.remove("show");
+$("#castPrev").onclick=()=>$("#castTrack").scrollBy({left:-$("#castTrack").clientWidth,behavior:"smooth"});
+$("#castNext").onclick=()=>$("#castTrack").scrollBy({left:$("#castTrack").clientWidth,behavior:"smooth"});
+$("#menuBtn").onclick=()=>$("#menu").classList.toggle("open");
+$("#shareBtn").onclick=share;
+$("#creatorBtn").onclick=creatorLogin;
+async function share(){if(navigator.share)try{await navigator.share({title:data.edition.name,url:location.href});}catch{}else{await navigator.clipboard?.writeText(location.href);toast("Link copiado!");}}
+function toast(t){const x=document.createElement("div");x.textContent=t;x.style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:100;background:#18181f;border:1px solid #333;padding:11px 15px;border-radius:12px";document.body.append(x);setTimeout(()=>x.remove(),2200)}
+function creatorLogin(){if(auth.currentUser){openAdmin();return}$("#modalBox").innerHTML=`<button class="close" onclick="closeModal()">✕</button><h2>🔐 Área do criador</h2><p style="color:#aaa">Entre com o e-mail e a senha do usuário de criador configurado no Firebase. A senha nunca é exibida no portal.</p><div class="form"><label>E-mail</label><input id="loginEmail" type="email" autocomplete="username"><label>Senha</label><input id="loginPass" type="password" autocomplete="current-password"><button class="btn" id="loginGo">Entrar</button><div class="notice">Visitantes não têm acesso ao painel. Para a proteção funcionar de verdade, o usuário de criador precisa estar autorizado nas regras do Firestore.</div></div>`;$("#modal").classList.add("show");$("#loginGo").onclick=async()=>{try{creatorEmail=$("#loginEmail").value.trim();await signInWithEmailAndPassword(auth,creatorEmail,$("#loginPass").value);closeModal();openAdmin()}catch(e){toast("E-mail ou senha inválidos.")}}}
+function openAdmin(){const e=data.edition;$("#modalBox").innerHTML=`<button class="close" onclick="closeModal()">✕</button><h2>⚙️ Painel do criador</h2><div class="notice">Você está logado. As alterações são salvas no Firebase e ficam disponíveis para quem abrir o Portal.</div><div class="adminTabs"><button class="active" data-tab="edition">Edição</button><button data-tab="cast">Elenco</button><button data-tab="posts">Conteúdos</button></div><div id="adminArea"></div>`;$("#modal").classList.add("show");document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-tab]").forEach(x=>x.classList.remove("active"));b.classList.add("active");adminTab(b.dataset.tab)});adminTab("edition")}
+function adminTab(tab){if(tab==="edition")adminEdition();if(tab==="cast")adminCast();if(tab==="posts")adminPosts()}
+let pendingImage=null;
+
+function imagePicker(label, current, aspect, key){
+ return `<div class="uploadBox">
+   <div class="uploadHead"><b>${label}</b><span>opcional</span></div>
+   <label class="fileBtn">📸 Escolher arquivo da galeria<input id="${key}File" type="file" accept="image/*" hidden></label>
+   ${current?`<img class="uploadPreview" id="${key}Preview" src="${esc(current)}" alt="">`:`<div class="uploadPreview emptyPreview" id="${key}Preview">Nenhuma foto escolhida</div>`}
+   <div class="uploadHint">Você pode escolher, cortar e mover a imagem antes de salvar.</div>
+ </div>`;
+}
+function bindImagePicker(key, current, aspect, state){
+ const input=$("#"+key+"File");
+ if(!input)return;
+ input.onchange=()=>{const f=input.files?.[0];if(f)startCrop(f,aspect,(blob,dataUrl)=>{state.blob=blob;state.dataUrl=dataUrl;const pr=$("#"+key+"Preview");if(pr){pr.outerHTML=`<img class="uploadPreview" id="${key}Preview" src="${dataUrl}" alt="">`}})};
+}
+async function uploadImage(blob, folder){
+ if(!blob)return "";
+ const uid=auth.currentUser?.uid; if(!uid)throw new Error("Você precisa estar logado.");
+ const path=`portal/${folder}/${uid}/${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`;
+ const r=storageRef(storage,path); await uploadBytes(r,blob,{contentType:"image/jpeg"}); return await getDownloadURL(r);
+}
+
+function adminEdition(){
+ const e=data.edition;
+ const state={blob:null,dataUrl:null};
+ $("#adminArea").innerHTML=`<div class="form">
+   <div class="panelTitle">🎬 Identidade da edição</div>
+   <div class="row"><div><label>Nome da edição</label><input id="eName" value="${esc(e.name)}"></div><div><label>Ano / temporada</label><input id="eYear" value="${esc(e.year)}"></div></div>
+   <label>Descrição</label><textarea id="eDesc">${esc(e.description)}</textarea>
+   <div class="row"><div><label>Cor principal</label><input id="eColor" type="color" value="${e.accent||"#8b5cf6"}"></div><div><label>Link da votação geral</label><input id="eVote" placeholder="Cole aqui apenas o link da votação" value="${esc(e.voteUrl||"")}"></div></div>
+   ${imagePicker("Capa da edição",e.cover,"cover","eCover")}
+   <button class="btn" id="saveEdition">💾 Salvar edição</button><button class="mini" id="logout">Sair da conta</button>
+ </div>`;
+ bindImagePicker("eCover",e.cover,"16:9",state);
+ $("#saveEdition").onclick=async()=>{
+   try{
+    let cover=e.cover||""; if(state.blob)cover=await uploadImage(state.blob,"edition");
+    data.edition={...data.edition,name:$("#eName").value.trim()||"Reality",year:$("#eYear").value.trim(),description:$("#eDesc").value.trim(),accent:$("#eColor").value,voteUrl:$("#eVote").value.trim(),cover};
+    await setDoc(doc(db,"portal","edition"),data.edition);applyTheme();render();toast("Edição salva!");
+   }catch(err){console.error(err);toast("Não foi possível salvar a edição.");}
+ };
+ $("#logout").onclick=async()=>{await signOut(auth);closeModal();toast("Sessão encerrada.")};
+}
+
+function adminCast(){
+ const area=$("#adminArea");
+ const people=data.cast.filter(p=>p.name);
+ area.innerHTML=`<div class="adminIntro"><b>🎭 Elenco da edição</b><span>Monte até 14 vagas. Cada participante pode ter foto, status, destaque e descrição.</span></div>
+ <div class="slotGrid">${Array.from({length:14},(_,i)=>{
+   const p=people[i];
+   return `<button class="slotBtn ${p?"filled":""}" data-slot="${i}"><strong>${p?esc(p.name):"Vaga "+(i+1)}</strong><small>${p?esc(p.status||"No jogo"):"Adicionar participante"}</small></button>`;
+ }).join("")}</div>
+ <div class="list" id="castList">${people.map((p,i)=>`<div class="item"><div class="itemPerson">${p.photo?`<img src="${esc(p.photo)}">`:`<span>👤</span>`}<div><b>${esc(p.name)}</b><div style="color:#999;font-size:12px">${esc(p.status||"No jogo")} • ${esc(p.role||"Sem destaque")}</div></div></div><div class="itemActions"><button class="mini" data-edit="${p.id}">Editar</button><button class="mini" data-del="${p.id}">Excluir</button></div></div>`).join("")||`<div class="empty">Comece escolhendo uma das 14 vagas acima.</div>`}</div>`;
+ area.querySelectorAll("[data-slot]").forEach(b=>b.onclick=()=>{const i=+b.dataset.slot;castForm(people[i],i)});
+ area.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>castForm(data.cast.find(p=>p.id===b.dataset.edit)));
+ area.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>deleteCast(b.dataset.del));
+}
+
+function castForm(p={},slot=0){
+ const state={blob:null,dataUrl:null};
+ const status=p.status||"No jogo", role=p.role||"Nenhum";
+ $("#adminArea").innerHTML=`<div class="form">
+  <div class="panelTitle">👤 ${p.id?"Editar participante":"Montar participante"} • Vaga ${slot+1}</div>
+  <label>Nome do participante</label><input id="cName" value="${esc(p.name||"")}">
+  <div class="row"><div><label>Status</label><select id="cStatus">
+    ${["No jogo","Eliminado","Desistente","Expulso","Finalista"].map(x=>`<option ${status===x?"selected":""}>${x}</option>`).join("")}
+  </select></div><div><label>Destaque / função</label><select id="cRole">
+    ${["Nenhum","Líder","Anjo","Imunizado","Paredão","Destaque","Capitão"].map(x=>`<option ${role===x?"selected":""}>${x}</option>`).join("")}
+  </select></div></div>
+  <label>Observação do participante</label><textarea id="cBio" placeholder="Ex.: líder da semana, indicação, curiosidades...">${esc(p.bio||"")}</textarea>
+  ${imagePicker("Foto do participante",p.photo,"1:1","cPhoto")}
+  <div class="notice">📸 A foto é escolhida direto da galeria. Não existe campo de URL para imagem. Você pode cortar, aproximar e mover a foto antes de salvar.</div>
+  <button class="btn" id="saveCast">${p.id?"💾 Salvar participante":"➕ Adicionar participante"}</button>
+  <button class="mini" id="backCast">Voltar ao elenco</button>
+ </div>`;
+ bindImagePicker("cPhoto",p.photo,"1:1",state);
+ $("#saveCast").onclick=async()=>{
+   const name=$("#cName").value.trim(); if(!name)return toast("Digite o nome.");
+   try{
+    let photo=p.photo||""; if(state.blob)photo=await uploadImage(state.blob,"cast");
+    const obj={name,role:$("#cRole").value,status:$("#cStatus").value,bio:$("#cBio").value.trim(),photo,order:p.id?p.order??slot:slot};
+    if(p.id)await updateDoc(doc(db,"portal","cast",p.id),obj);
+    else {const d=doc(collection(db,"portal","cast")); await setDoc(d,obj);}
+    await loadData();adminCast();toast("Participante salvo!");
+   }catch(err){console.error(err);toast("Não foi possível salvar o participante. Verifique o Storage do Firebase.");}
+ };
+ $("#backCast").onclick=adminCast;
+}
+async function deleteCast(id){if(confirm("Excluir participante?")){await deleteDoc(doc(db,"portal","cast",id));await loadData();adminCast();}}
+
+function adminPosts(){
+ const area=$("#adminArea");
+ area.innerHTML=`<div class="adminIntro"><b>📺 Conteúdos</b><span>Cada categoria tem sua própria identidade visual no Portal.</span></div>
+ <div class="actions"><button class="btn" id="newPost">+ Criar conteúdo</button></div><div class="list" id="postList"></div>`;
+ area.querySelector("#newPost").onclick=()=>postForm();
+ area.querySelector("#postList").innerHTML=data.posts.map(p=>`<div class="item"><div><b>${esc(p.title)}</b><div style="color:#999;font-size:12px">${esc(TYPES.find(x=>x[0]===p.type)?.[1]||p.type)}</div></div><div class="itemActions"><button class="mini" data-edit="${p.id}">Editar</button><button class="mini" data-del="${p.id}">Excluir</button></div></div>`).join("")||`<div class="empty">Nenhum conteúdo.</div>`;
+ area.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>postForm(data.posts.find(p=>p.id===b.dataset.edit)));
+ area.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>deletePost(b.dataset.del));
+}
+function postForm(p={type:"noticia",title:"",text:"",image:"",voteUrl:""}){
+ const state={blob:null,dataUrl:null};
+ const type=p.type||"noticia";
+ $("#adminArea").innerHTML=`<div class="form">
+  <div class="panelTitle">📝 ${p.id?"Editar conteúdo":"Novo conteúdo"}</div>
+  <label>Categoria</label><select id="pType">${TYPES.filter(x=>x[0]!=="all").map(x=>`<option value="${x[0]}" ${type===x[0]?"selected":""}>${x[1]}</option>`).join("")}</select>
+  <label>Título</label><input id="pTitle" value="${esc(p.title)}">
+  <label>Texto</label><textarea id="pText">${esc(p.text)}</textarea>
+  ${imagePicker("Imagem do conteúdo",p.image,"16:9","pImage")}
+  <label>Link de votação (opcional)</label><input id="pVote" placeholder="Use somente se este conteúdo tiver votação" value="${esc(p.voteUrl||"")}">
+  <div class="notice">🖼️ Para imagens, sempre use <b>Escolher arquivo</b> e a galeria. URL é usado somente para links de votação.</div>
+  <button class="btn" id="savePost">${p.id?"💾 Salvar":"🚀 Publicar"}</button><button class="mini" id="backPost">Voltar</button>
+ </div>`;
+ bindImagePicker("pImage",p.image,"16:9",state);
+ $("#savePost").onclick=async()=>{
+   const title=$("#pTitle").value.trim();if(!title)return toast("Digite um título.");
+   try{
+    let image=p.image||"";if(state.blob)image=await uploadImage(state.blob,"posts");
+    const obj={type:$("#pType").value,title,text:$("#pText").value.trim(),image,voteUrl:$("#pVote").value.trim(),createdAt:p.createdAt||Date.now()};
+    if(p.id)await updateDoc(doc(db,"portal","posts",p.id),obj);else await addDoc(collection(db,"portal","posts"),obj);
+    await loadData();adminPosts();toast("Conteúdo salvo!");
+   }catch(err){console.error(err);toast("Não foi possível salvar. Verifique o Storage do Firebase.");}
+ };
+ $("#backPost").onclick=adminPosts;
+}
+async function deletePost(id){if(confirm("Excluir conteúdo?")){await deleteDoc(doc(db,"portal","posts",id));await loadData();adminPosts();}}
+
+$("#modal").onclick=e=>{if(e.target.id==="modal")closeModal()};
+
+function startCrop(file,aspect,done){
+ if(!file.type.startsWith("image/"))return toast("Escolha uma imagem.");
+ const reader=new FileReader();
+ reader.onload=()=>openCropper(reader.result,aspect,done);
+ reader.readAsDataURL(file);
+}
+function openCropper(src,aspect,done){
+ const ov=document.createElement("div");ov.className="cropOverlay";ov.innerHTML=`<div class="cropBox">
+  <button class="close" id="cropCancel">✕</button><h2>✂️ Ajustar foto</h2>
+  <p class="cropHelp">Arraste pelos controles para aproximar e mover a imagem.</p>
+  <canvas id="cropCanvas"></canvas>
+  <label>🔎 Zoom <input id="cropZoom" type="range" min="1" max="3" step=".01" value="1"></label>
+  <label>↔️ Horizontal <input id="cropX" type="range" min="-100" max="100" value="0"></label>
+  <label>↕️ Vertical <input id="cropY" type="range" min="-100" max="100" value="0"></label>
+  <div class="actions"><button class="btn" id="cropSave">Usar esta foto</button><button class="mini" id="cropCancel2">Cancelar</button></div>
+ </div>`;
+ document.body.appendChild(ov);
+ const canvas=ov.querySelector("#cropCanvas"),ctx=canvas.getContext("2d"),img=new Image();
+ img.onload=()=>{
+   const cw=360,ch=Math.round(cw/aspect);canvas.width=cw;canvas.height=Math.min(360,ch);
+   const draw=()=>{const zoom=+ov.querySelector("#cropZoom").value,x=+ov.querySelector("#cropX").value,y=+ov.querySelector("#cropY").value;
+     const scale=Math.max(canvas.width/img.width,canvas.height/img.height)*zoom;
+     const w=img.width*scale,h=img.height*scale;
+     const ox=(canvas.width-w)/2+x*(canvas.width/100),oy=(canvas.height-h)/2+y*(canvas.height/100);
+     ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,ox,oy,w,h);
+   };
+   ["cropZoom","cropX","cropY"].forEach(id=>ov.querySelector("#"+id).oninput=draw);draw();
+   ov.querySelector("#cropSave").onclick=()=>canvas.toBlob(blob=>{const dataUrl=canvas.toDataURL("image/jpeg",.9);done(blob,dataUrl);ov.remove()},"image/jpeg",.9);
+ };
+ img.src=src;
+ ov.querySelector("#cropCancel").onclick=ov.querySelector("#cropCancel2").onclick=()=>ov.remove();
+}
+onAuthStateChanged(auth,()=>{});
+loadData();
+</script>
+
+</body></html>
